@@ -29,3 +29,11 @@ jobs:
         run: |
           mysql -h 127.0.0.1 -u root coursework < skydiving-training/schema.sql
           mysql -h 127.0.0.1 -u root coursework < skydiving-training/queries-and-triggers.sql
+      - name: Verify trigger behavior
+        env:
+          MYSQL_PWD: temporary-test-only
+        run: |
+          test "$(mysql -h 127.0.0.1 -u root -N -B group8proj -e 'SELECT total_jumps FROM Student WHERE student_id = 100')" = "7"
+          test "$(mysql -h 127.0.0.1 -u root -N -B group8proj -e 'SELECT COUNT(*) FROM Training_session WHERE session_id = 10')" = "0"
+          test "$(mysql -h 127.0.0.1 -u root -N -B group8proj -e 'SELECT COUNT(*) FROM Session_Attendance WHERE session_id = 10')" = "0"
+          test "$(mysql -h 127.0.0.1 -u root -N -B group8proj -e 'SELECT COUNT(*) FROM Session_Attendance WHERE session_id = 11')" = "1"

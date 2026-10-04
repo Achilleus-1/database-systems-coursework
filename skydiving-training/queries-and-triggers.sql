@@ -41,11 +41,11 @@ DELIMITER ;
 INSERT INTO Training_session 
 VALUES (14, 1, 100, '2025-05-01', 2, 'Passed', 'Stable posture');
 
--- trigger to delete attendance after session DELETE
+-- Delete attendance before the parent row so the foreign key remains valid.
 DROP TRIGGER IF EXISTS trg_delete_attendance;
 DELIMITER $$
 CREATE TRIGGER trg_delete_attendance
-AFTER DELETE ON Training_session
+BEFORE DELETE ON Training_session
 FOR EACH ROW
 BEGIN
     DELETE FROM Session_Attendance
@@ -53,10 +53,7 @@ BEGIN
 END$$
 DELIMITER ;
 
--- test DELETE for cascade trigger
-DELETE FROM Session_Attendance
-WHERE session_id = 10;
-
+-- Test deletion with attendance still present; the trigger removes it.
 DELETE FROM Training_session
 WHERE session_id = 10;
 
