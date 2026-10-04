@@ -1,0 +1,31 @@
+name: MySQL examples
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mysql:
+    name: MySQL examples
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: temporary-test-only
+          MYSQL_DATABASE: coursework
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -ptemporary-test-only"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Load schema and exercise queries in disposable database
+        env:
+          MYSQL_PWD: temporary-test-only
+        run: |
+          mysql -h 127.0.0.1 -u root coursework < skydiving-training/schema.sql
+          mysql -h 127.0.0.1 -u root coursework < skydiving-training/queries-and-triggers.sql

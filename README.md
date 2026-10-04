@@ -4,9 +4,9 @@ MySQL query collections and a relational skydiving-training database with constr
 
 ## Original coursework
 
-- CS 3743-003 — Database Systems, Spring 2025
+- Database Systems
 
-Originally completed at the University of Texas at San Antonio during the terms above and imported to GitHub later. This repository preserves the submitted implementation; repository documentation and import housekeeping were added separately.
+Originally completed at the University of Texas at San Antonio and imported to GitHub later. This repository retains the coursework implementation with documented maintenance fixes and demonstration assets.
 
 **Languages and technologies:** SQL, MySQL.
 
@@ -38,3 +38,9 @@ The library and sales queries require their course databases, which are not redi
 - The SQL exercises use MySQL-specific functions and DELIMITER syntax.
 
 Only source code, build configuration, and required text inputs are included. Written submissions, assignment instructions, PDFs, videos, generated outputs, binary builds, and private configuration are omitted. Anonymized contributor labels and supplied-code comments retain the distinction between submitted work and scaffolding. No license for course-provided material is inferred.
+
+## Development and reuse
+
+See [DEVELOPMENT.md](DEVELOPMENT.md) for reproducible checks and known archival dependencies, [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidance, and [SECURITY.md](SECURITY.md) for private reports.
+
+Reuse terms and provenance are documented in [NOTICE.md](NOTICE.md) and [LICENSE](LICENSE). The maintenance license does not grant rights to original course or team material.
